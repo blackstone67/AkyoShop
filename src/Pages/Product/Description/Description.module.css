@@ -1,0 +1,88 @@
+.description {
+  margin: 0 auto;
+  padding: 2rem 0;
+  max-width: 1200px;
+}
+
+.description_info {
+  margin-bottom: 16px;
+}
+
+.description_info--container {
+  background-color: rgb(243, 242, 242);
+  padding-left: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.description_info--container h3 {
+  font-weight: normal;
+}
+
+.description_info--container h3:hover {
+  color: #0e4861;
+  cursor: default;
+}
+
+.description_info--container .decrease {
+  height: 4px;
+  width: 16px;
+  background-color: #fff;
+}
+
+.description_info--container svg {
+  color: #fff;
+  font-size: 32px;
+}
+
+.description_info--container .boxDecrease {
+  width: 48px;
+  height: 54px;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.description_info--list {
+  margin-top: 2rem;
+  padding-left: 16px;
+}
+
+.description_info--list div {
+  margin-bottom: 16px;
+}
+
+.description_info--list ul {
+  margin-left: 16px;
+}
+
+.description_info--list h4 {
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.description_info--list li {
+  margin-bottom: 8px;
+}
+
+.table {
+  display: flex;
+  justify-content: flex-start;
+  padding: 16px;
+}
+
+.size {
+  flex: 1;
+  padding: 16px;
+  border: 1px solid #ccc;
+}
+
+.sizeResult {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-left: none;
+  padding: 16px;
+}

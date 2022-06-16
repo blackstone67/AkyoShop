@@ -1,0 +1,115 @@
+.cart {
+}
+
+.header_cart {
+  display: flex;
+  padding: 16px;
+  align-items: center;
+  background-color: #20485f;
+  color: #fff;
+}
+
+.close {
+  display: inline-block;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.close path {
+  stroke: #fff;
+}
+
+.card {
+  flex: 1;
+  text-align: center;
+}
+
+.product {
+  display: flex;
+  padding: 1rem;
+  padding-right: 0;
+  transition: all 0.5s ease;
+}
+
+.avatar {
+  width: 100px;
+  height: 135px;
+  flex: 1;
+}
+
+.info {
+  padding: 0 16px;
+  max-width: 200px;
+}
+
+.info .name {
+  margin-bottom: 8px;
+}
+
+.info .price {
+  color: rgb(175, 174, 174);
+  font-size: 12px;
+}
+
+.cart_info .closeProduct {
+  visibility: hidden;
+  opacity: 0;
+  flex: 1;
+  cursor: pointer;
+  padding: 0 16px;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+
+.closeProduct:hover {
+  visibility: visible;
+  opacity: 1;
+}
+
+.product:hover + .closeProduct {
+  visibility: visible;
+  opacity: 1;
+}
+
+.cart_info {
+  display: flex;
+  align-items: center;
+}
+
+.amount {
+  margin-top: 16px;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.amount div {
+  margin-right: 1rem;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
+}
+
+.actions button {
+  outline: none;
+  margin-bottom: 16px;
+  padding: 16px 32px;
+  border: none;
+  border-radius: 16px;
+  color: #fff;
+  background-color: rgb(22, 22, 22);
+  cursor: pointer;
+}
+
+.actions button:hover {
+  background-color: rgb(22, 22, 22, 0.7);
+}
+
+.titleEmpty {
+  padding: 16px;
+}
