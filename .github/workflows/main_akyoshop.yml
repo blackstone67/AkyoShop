@@ -21,10 +21,12 @@ jobs:
         with:
           node-version: '16.x'
 
-      - name: yarn install, build, and test
+      - name: npm install, build, and test
         run: |
-          yarn install
-          yarn run build --if-present
+          npm install
+          npm run build --if-present
+          npm run test --if-present
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
@@ -50,5 +52,5 @@ jobs:
         with:
           app-name: 'AkyoShop'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B4073BAFA8B94704877345A8396E4B0C }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BBCFBB80350C411CBCAAC3DDBF68300D }}
           package: .
