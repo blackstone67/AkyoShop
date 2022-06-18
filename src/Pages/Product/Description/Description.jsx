@@ -29,14 +29,14 @@ const Description = () => {
         </div>
         {!description && (
           <div className={classes['description_info--list']}>
-            <div>
+            {/* <div>
               <h4>{t('infoPro')}</h4>
               <ul>
                 <li>{t('product')}: Playsuit</li>
                 <li>{t('origin')}: Việt Nam</li>
                 <li>{t('color')}: Hồng</li>
               </ul>
-            </div>
+            </div> */}
             <div>
               <h4>{t('infoSize')}</h4>
               <ul>

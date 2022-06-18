@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -8,9 +8,6 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
-import { TextField } from '@material-ui/core';
-import axios from 'axios';
-import { useSelector } from 'react-redux';
 
 const styles = (theme) => ({
   root: {
@@ -56,62 +53,61 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-export default function ChangePass({ openDialog, onClose }) {
-  const [password, setPassword] = useState('');
-  const token = useSelector((state) => state.login.token);
-
-  const changedPasswordHandler = async () => {
-    console.log(password);
-
-    const response = await axios.post(
-      `https://backendfashionstore.azurewebsites.net/api/Users/ChangePassword?userPassword=${password}`,
-      '',
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    if (response.status === 200) {
-      onClose();
-    }
-  };
-
+export default function DialogOrder({ open, onClose, data }) {
   return (
-    <>
+    <div>
       <Dialog
-        aria-labelledby="customized-dialog-title"
-        open={openDialog}
         onClose={onClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
       >
-        <DialogTitle onClose={onClose} id="customized-dialog-title">
-          Đổi mật khẩu
+        <DialogTitle id="customized-dialog-title" onClose={onClose}>
+          Chi tiết đơn hàng
         </DialogTitle>
         <DialogContent dividers>
-          <TextField
-            id="outlined-basic"
-            label="Mật khẩu mới"
-            variant="outlined"
-            fullWidth={true}
+          <div
             style={{
-              marginBottom: '16px',
-              width: '500px',
+              display: 'flex',
+              justifyContent: 'space-between',
             }}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          >
+            <Typography gutterBottom>TÊN SẢN PHẨM</Typography>
+            <Typography gutterBottom>TỔNG TIỀN</Typography>
+          </div>
+          {data.products &&
+            data.products.map((item) => (
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  marginBottom: '16px',
+                }}
+                key={item.id}
+              >
+                <div>
+                  <Typography
+                    gutterBottom
+                    style={{
+                      marginRight: '64px',
+                    }}
+                  >
+                    {item.name}
+                  </Typography>
+                  <div>
+                    <span>{item.price / 1000}.000đ x 1</span>
+                  </div>
+                </div>
+
+                <Typography>{item.price / 1000}.000đ</Typography>
+              </div>
+            ))}
         </DialogContent>
         <DialogActions>
-          <Button
-            autoFocus
-            color="primary"
-            onClick={() => changedPasswordHandler()}
-          >
-            Thay đổi
+          <Button autoFocus color="primary" onClick={onClose}>
+            Thoát
           </Button>
         </DialogActions>
       </Dialog>
-    </>
+    </div>
   );
 }

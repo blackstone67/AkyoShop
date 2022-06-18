@@ -11,6 +11,7 @@ import BackDrop from '../../Components/UI/BackDrop/BackDrop';
 import { useState } from 'react';
 import axios from 'axios';
 import { addressOrderActions } from '../../store/addressOrderSlice';
+import { actionsHome } from '../../store/homeSlice';
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
@@ -65,6 +66,7 @@ export default function Review(props) {
       });
       setOpenBackDrop(false);
       dispatch(addressOrderActions.clearAddressOrder());
+      dispatch(actionsHome.changeOrder());
 
       props.onNext();
     }, 1500);

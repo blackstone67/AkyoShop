@@ -1,6 +1,9 @@
-import { Avatar, TableBody, TableCell, TableRow } from '@material-ui/core';
+import { Button, TableBody, TableCell, TableRow } from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import React from 'react';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import DialogOrder from '../../../DialogOrder/DialogOrder';
 
 const useStyles = makeStyles({
   imgSize: {
@@ -45,36 +48,39 @@ const StyledTableCell = withStyles((theme) => ({
 
 const TableProductBody = ({ dataTable }) => {
   const classes = useStyles();
+  const { t } = useTranslation();
+  const [openDialog, setOpenDialog] = useState(false);
+  const [dataDialog, setDataDialog] = useState([]);
+
+  const openHandler = (id) => {
+    setOpenDialog(true);
+    const dataTemp = dataTable.findIndex((item) => item.id === id);
+    setDataDialog(dataTable[dataTemp]);
+  };
+
+  const closeHandler = () => {
+    setOpenDialog(false);
+  };
 
   return (
     <>
+      <DialogOrder open={openDialog} onClose={closeHandler} data={dataDialog} />
       <TableBody>
-        {dataTable.map((item) => (
+        {dataTable.map((item, index) => (
           <StyledTableRow key={item.id}>
-            <StyledTableCell align="left">{item.stt}</StyledTableCell>
-            <StyledTableCell
-              align="left"
-              component="th"
-              scope="row"
-              className={classes.name}
-            >
-              {item.name}
+            <StyledTableCell align="left" className={classes.amount}>
+              {t('nameOrder')} {index + 1}
             </StyledTableCell>
-            <StyledTableCell align="center">
-              <Avatar
-                variant="square"
-                src={item.image}
-                className={classes.imgSize}
-              />
-            </StyledTableCell>
-            <StyledTableCell align="right" className={classes.amount}>
-              {item.amount}
+            <StyledTableCell align="left" className={classes.amount}>
+              {item.products.length}
             </StyledTableCell>
             <StyledTableCell align="left" className={classes.category}>
-              {item.category}
+              {item.products.reduce((acc, item) => acc + item.price, 0)}
             </StyledTableCell>
-            <StyledTableCell align="left" className={classes.status}>
-              {item.status}
+            <StyledTableCell align="center" className={classes.status}>
+              <Button onClick={() => openHandler(item.id)}>
+                <VisibilityIcon />
+              </Button>
             </StyledTableCell>
           </StyledTableRow>
         ))}

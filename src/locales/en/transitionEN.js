@@ -75,4 +75,6 @@ export const transitionEN = {
   status: 'Status',
   amount: 'Amount',
   listOrder: 'List of orders',
+  nameOrder: 'Order',
+  actions: 'Actions',
 };

@@ -1,14 +1,14 @@
 import { Container, makeStyles } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import LayoutContainer from '../../Components/Layout/LayoutContainer';
 import SearchAdmin from '../../Components/UI/SearchAdmin/SearchAdmin';
 import TableProduct from '../../Components/UI/Table/TableProduct/TableProduct';
 import HeaderCategoryContainer from '../../Components/UI/Title/HeaderContainer';
-import { DUMMY_PRODUCT } from '../../Data/DataTableProduct';
 import Title from '../../Components/UI/Title/Title';
 import ChangePass from '../../Components/UI/DiaLog/ChangePass';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
       'url(https://images.unsplash.com/photo-1648492694364-26cf4b39806b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
+    height: '100vh',
   },
 }));
 
@@ -33,6 +34,27 @@ const Admin = () => {
   const { t } = useTranslation();
   const userName = useSelector((state) => state.login.userName);
   const [openDialog, setOpenDialog] = useState(false);
+  const buyOrder = useSelector((state) => state.home.buyOrder);
+  const token = useSelector((state) => state.login.token);
+  const [dataTable, setDataTable] = useState([]);
+
+  useEffect(() => {
+    async function getHistoryOrder() {
+      const res = await axios.get(
+        'https://backendfashionstore.azurewebsites.net/api/HistoryOrders',
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const response = res.data;
+      setDataTable(response.orders);
+    }
+
+    getHistoryOrder();
+  }, [buyOrder, token]);
 
   const changePassHandler = () => {
     setOpenDialog(true);
@@ -61,7 +83,7 @@ const Admin = () => {
           <SearchAdmin title={t('titleSearchProduct')} />
         </LayoutContainer>
         <LayoutContainer classes={classes}>
-          <TableProduct dataTable={DUMMY_PRODUCT} />
+          <TableProduct dataTable={dataTable} />
         </LayoutContainer>
       </main>
     </>

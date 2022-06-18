@@ -74,7 +74,9 @@ export const transitionVI = {
   nameProduct: 'Tên danh mục',
   action: 'Hành động',
   image: 'Ảnh',
-  amount: 'Số lượng',
+  amount: 'Số lượng sản phẩm',
   status: 'Tình trạng',
   listOrder: 'Danh sách các đơn hàng',
+  nameOrder: 'Đơn Hàng',
+  actions: 'Hành động',
 };

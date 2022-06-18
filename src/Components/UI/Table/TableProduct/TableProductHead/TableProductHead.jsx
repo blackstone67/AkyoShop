@@ -21,12 +21,12 @@ const TableProductHead = () => {
   return (
     <TableHead>
       <TableRow>
-        <StyledTableCell align="left">{t('stt')}</StyledTableCell>
-        <StyledTableCell align="left">{t('nameProduct')}</StyledTableCell>
-        <StyledTableCell align="center">{t('image')}&nbsp;</StyledTableCell>
-        <StyledTableCell align="right">{t('amount')}&nbsp;</StyledTableCell>
-        <StyledTableCell align="left">{t('category')} &nbsp;</StyledTableCell>
-        <StyledTableCell align="left">{t('status')}&nbsp;</StyledTableCell>
+        <StyledTableCell align="left">{t('nameOrder')}&nbsp;</StyledTableCell>
+        <StyledTableCell align="left">{t('amount')}&nbsp;</StyledTableCell>
+        <StyledTableCell align="left">
+          {t('totalAmount')} &nbsp;
+        </StyledTableCell>
+        <StyledTableCell align="center">{t('actions')}&nbsp;</StyledTableCell>
       </TableRow>
     </TableHead>
   );

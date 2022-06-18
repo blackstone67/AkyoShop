@@ -5,6 +5,7 @@ const homeSlice = createSlice({
   initialState: {
     productHome: [],
     isLogin: false,
+    buyOrder: false,
   },
   reducers: {
     getProduct(state, action) {
@@ -12,6 +13,9 @@ const homeSlice = createSlice({
     },
     setIsLogin(state) {
       state.isLogin = true;
+    },
+    changeOrder(state) {
+      state.buyOrder = !state.buyOrder;
     },
   },
 });
