@@ -13,6 +13,7 @@ import Container from '@material-ui/core/Container';
 import Copyright from '../../Components/UI/Copyright';
 import BackDrop from '../../Components/UI/BackDrop/BackDrop';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -40,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ForgotPassword = () => {
   const classes = useStyles();
+  const history = useHistory();
   const [forgot, setForgot] = useState(true);
   const [openBackDrop, setOpenBackDrop] = useState(false);
   const [value, setValue] = useState('');
@@ -130,15 +132,15 @@ const ForgotPassword = () => {
                 </Button>
               </>
               <Grid container justifyContent="flex-end">
-                <Grid item style={{ marginRight: '16px' }}>
-                  <Link href="/register" variant="body2">
-                    Đăng ký
-                  </Link>
+                <Grid
+                  item
+                  style={{ marginRight: '16px' }}
+                  onClick={() => history.push('/register')}
+                >
+                  Đăng ký
                 </Grid>
-                <Grid item>
-                  <Link href="/login" variant="body2">
-                    Đăng nhập
-                  </Link>
+                <Grid item onClick={() => history.push('/login')}>
+                  Đăng nhập
                 </Grid>
               </Grid>
             </form>

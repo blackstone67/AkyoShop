@@ -57,7 +57,7 @@ export default function Review(props) {
         objProduct[productCart[i].id] = productCart[i].quality;
       }
 
-      axios.post(`https://huuhieu.site/api/Orders`, {
+      axios.post(`https://backendfashionstore.azurewebsites.net/api/Orders`, {
         productWithQuantityData: objProduct,
         phoneNumberData: number,
         addressData: address,
