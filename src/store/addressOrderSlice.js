@@ -40,6 +40,10 @@ const addressOrderSlice = createSlice({
     setErrorEmail(state) {
       state.errorEmail = true;
     },
+    setEmailLogin(state, action) {
+      console.log(action.payload);
+      state.email = action.payload;
+    },
     clearAddressOrder(state) {
       state.errorName = false;
       state.errorNumber = false;

@@ -74,4 +74,5 @@ export const transitionEN = {
   image: 'Image',
   status: 'Status',
   amount: 'Amount',
+  listOrder: 'List of orders',
 };

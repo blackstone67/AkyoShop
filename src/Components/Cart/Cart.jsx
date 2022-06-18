@@ -55,7 +55,7 @@ const Cart = (props) => {
                 <div className={classes.cart_info} key={item.id}>
                   <div className={classes.product}>
                     <div className={classes.avatar}>
-                      {item.image.indexOf('image') !== -1 ? (
+                      {item.image.indexOf('image_') !== -1 ? (
                         <Avatar
                           alt="Remy Sharp"
                           variant="square"
@@ -63,7 +63,7 @@ const Cart = (props) => {
                             width: '100%',
                             height: '100%',
                           }}
-                          src={`https://huuhieu.site/api/ImageUploads/${item.image}`}
+                          src={`https://backendfashionstore.azurewebsites.net/api/ImageUploads/${item.image}`}
                         />
                       ) : (
                         <Avatar

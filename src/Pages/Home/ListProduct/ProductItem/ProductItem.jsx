@@ -31,6 +31,8 @@ const ProductItem = ({ classes, card }) => {
     );
   };
 
+  console.log(card);
+
   return (
     <Grid item key={card.id} xs={12} sm={6} md={4}>
       <Card className={classes.card}>

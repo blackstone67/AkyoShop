@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
@@ -10,7 +10,6 @@ import AddressForm from './AddressForm';
 import Review from './Review';
 import ThankYou from './ThankYou';
 import { useDispatch } from 'react-redux';
-import { addressOrderActions } from '../../store/addressOrderSlice';
 import { actionsCart } from '../../store/cartSlice';
 
 function Copyright() {
@@ -69,10 +68,6 @@ export default function Checkout() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
-
-  useEffect(() => {
-    dispatch(addressOrderActions.clearAddressOrder());
-  }, [dispatch]);
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);

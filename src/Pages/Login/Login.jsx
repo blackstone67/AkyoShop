@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actionsLogin } from '../../store/loginSlice';
 import axios from 'axios';
 import { actionsHome } from '../../store/homeSlice';
+import { addressOrderActions } from '../../store/addressOrderSlice';
 
 function Copyright() {
   return (
@@ -133,20 +134,24 @@ const Login = () => {
     ) {
       try {
         const response = await axios.get(
-          `https://huuhieu.site/api/Users/Login?email=${email}&password=${password}&rememberme=true`,
+          `https://backendfashionstore.azurewebsites.net/api/Users/Login?email=${email}&password=${password}&rememberme=true`,
           {
             headers: { 'Content-Type': 'application/json' },
           }
         );
 
         if (response.status === 200) {
-          const response = await axios.get(`https://huuhieu.site/api/Users`);
+          dispatch(actionsLogin.setToken(response.data.token));
 
-          let indexItem = response.data.findIndex(
+          const responseTest = await axios.get(
+            `https://backendfashionstore.azurewebsites.net/api/Users`
+          );
+
+          let indexItem = responseTest.data.findIndex(
             (item) => item.email === email
           );
 
-          dispatch(actionsLogin.setUserName(response.data[indexItem].name));
+          dispatch(actionsLogin.setUserName(responseTest.data[indexItem].name));
 
           handleOpen();
           setTimeout(() => {
@@ -155,6 +160,7 @@ const Login = () => {
             else history.push('/home');
             dispatch(actionsLogin.setIsUserLogin());
             dispatch(actionsLogin.clearLogin());
+            dispatch(addressOrderActions.setEmailLogin(email));
             dispatch(actionsHome.setIsLogin());
           }, 500);
         }

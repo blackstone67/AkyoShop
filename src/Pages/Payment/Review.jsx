@@ -65,6 +65,7 @@ export default function Review(props) {
       });
       setOpenBackDrop(false);
       dispatch(addressOrderActions.clearAddressOrder());
+
       props.onNext();
     }, 1500);
   };

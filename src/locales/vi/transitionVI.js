@@ -76,4 +76,5 @@ export const transitionVI = {
   image: 'Ảnh',
   amount: 'Số lượng',
   status: 'Tình trạng',
+  listOrder: 'Danh sách các đơn hàng',
 };

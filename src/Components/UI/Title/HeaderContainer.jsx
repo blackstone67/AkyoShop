@@ -43,7 +43,7 @@ export default function HeaderCategoryContainer(props) {
         </div>
         <Button
           variant="contained"
-          onClick={props.addHandler}
+          onClick={props.changePass}
           style={{
             boxShadow: 'none',
           }}
