@@ -1,14 +1,5 @@
-import {
-  Avatar,
-  Button,
-  TableBody,
-  TableCell,
-  TableRow,
-} from '@material-ui/core';
+import { Avatar, TableBody, TableCell, TableRow } from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
 import { useTranslation } from 'react-i18next';
 import React from 'react';
 
