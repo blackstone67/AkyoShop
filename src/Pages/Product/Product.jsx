@@ -30,7 +30,7 @@ const Product = () => {
 
   return (
     <>
-      <About product={product} />
+      {product.length > 0 && <About product={product} />}
       <Description />
       <Footer />
     </>

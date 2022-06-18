@@ -133,26 +133,37 @@ const Login = () => {
     ) {
       try {
         const response = await axios.get(
-          `https://backendfashionstore.azurewebsites.net/api/Users/Login?email=${email}&password=${password}&rememberme=false`,
+          `https://huuhieu.site/api/Users/Login?email=${email}&password=${password}&rememberme=true`,
           {
             headers: { 'Content-Type': 'application/json' },
           }
         );
 
         if (response.status === 200) {
+          const response = await axios.get(`https://huuhieu.site/api/Users`);
+
+          let indexItem = response.data.findIndex(
+            (item) => item.email === email
+          );
+
+          dispatch(actionsLogin.setUserName(response.data[indexItem].name));
+
           handleOpen();
           setTimeout(() => {
-            history.push('/home');
+            if (history.location.pathname !== '/login')
+              history.push(history.location.pathname);
+            else history.push('/home');
+            dispatch(actionsLogin.setIsUserLogin());
             dispatch(actionsLogin.clearLogin());
             dispatch(actionsHome.setIsLogin());
-          }, 1000);
+          }, 500);
         }
       } catch (e) {
         handleOpen();
         setTimeout(() => {
           dispatch(actionsLogin.setErrorLogin());
           handleClose();
-        }, 1000);
+        }, 500);
       }
     }
   };
@@ -176,7 +187,6 @@ const Login = () => {
                 error={errorEmail || errorEmptyEmail}
                 variant="outlined"
                 margin="normal"
-                required
                 fullWidth
                 id="email"
                 label="Email Address"
@@ -194,7 +204,6 @@ const Login = () => {
                 error={errorEmptyPassword || errorPassword}
                 variant="outlined"
                 margin="normal"
-                required
                 fullWidth
                 name="password"
                 label="Password"
@@ -223,17 +232,27 @@ const Login = () => {
                 Đăng nhập
               </Button>
               <Button
-                type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
                 className={classes.guest}
+                type="button"
+                onClick={() => {
+                  handleOpen();
+                  setTimeout(() => {
+                    if (history.location.pathname !== '/login')
+                      history.push(history.location.pathname);
+                    else history.push('/home');
+                    dispatch(actionsLogin.clearLogin());
+                    dispatch(actionsHome.setIsLogin());
+                  }, 500);
+                }}
               >
                 Mua hàng không đăng nhập
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="/" variant="body2">
+                  <Link href="/forgot-password" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>

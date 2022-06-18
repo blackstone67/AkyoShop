@@ -150,7 +150,7 @@ const About = (props) => {
             <div className={classes.imgMain}>
               <img
                 src={`${
-                  imageScaled.indexOf('image') !== -1
+                  imageScaled.indexOf('image_') !== -1
                     ? `https://backendfashionstore.azurewebsites.net/api/ImageUploads/${imageScaled}`
                     : `https:${imageScaled}`
                 }`}

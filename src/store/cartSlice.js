@@ -64,6 +64,10 @@ const cartSlice = createSlice({
     closeCart(state) {
       state.openCart = false;
     },
+    clearCart(state) {
+      state.productCart = [];
+      state.totalAmount = 0;
+    },
   },
 });
 

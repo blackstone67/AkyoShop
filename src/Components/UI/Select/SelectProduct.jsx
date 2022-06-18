@@ -6,6 +6,7 @@ import {
   Select,
 } from '@material-ui/core';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { ActionsSelect } from '../../../store/selectSlice';
 const useStyles = makeStyles((theme) => ({
@@ -20,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 const SelectProduct = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const valueSelect = useSelector((state) => state.select.valueSelect);
 
@@ -29,7 +31,9 @@ const SelectProduct = () => {
 
   return (
     <FormControl variant="outlined" className={classes.formControl}>
-      <InputLabel id="demo-simple-select-outlined-label">Thứ tự</InputLabel>
+      <InputLabel id="demo-simple-select-outlined-label">
+        {t('order')}
+      </InputLabel>
       <Select
         labelId="demo-simple-select-outlined-label"
         id="demo-simple-select-outlined"

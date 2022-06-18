@@ -13,6 +13,8 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { actionsHome } from './store/homeSlice';
 import AllProduct from './Pages/AllProduct/AllProduct';
+import ForgotPassword from './Pages/ForgotPassword/ForgotPassword';
+import Admin from './Pages/Admin/Admin';
 
 function App() {
   const openCart = useSelector((state) => state.cart.openCart);
@@ -21,9 +23,7 @@ function App() {
 
   useEffect(() => {
     async function getApiProductHome() {
-      const response = await axios.get(
-        'https://backendfashionstore.azurewebsites.net/api/Products'
-      );
+      const response = await axios.get('https://huuhieu.site/api/Products');
       let data = [];
       for (let i = 0; i < response.data.length; i++) {
         if (response.data[i].images.length > 0) {
@@ -41,10 +41,13 @@ function App() {
   return (
     <>
       {openCart && <Cart />}
-      <NavBar />
+      {isLogin && <NavBar />}
       <Switch>
         <Route path="/login">
           {isLogin ? <Redirect to="/home" /> : <Login />}
+        </Route>
+        <Route path="/forgot-password">
+          <ForgotPassword />
         </Route>
         <Route path="/register">
           <Register />
@@ -53,17 +56,16 @@ function App() {
           {isLogin ? <Home /> : <Redirect to="/login" />}
         </Route>
         <Route path="/product/:productId">
-          <Product />
+          {isLogin ? <Product /> : <Login />}
         </Route>
         <Route path="/all-product">
-          <AllProduct />
+          {isLogin ? <AllProduct /> : <Login />}
         </Route>
+        <Route path="/admin">{isLogin ? <Admin /> : <Login />}</Route>
         <Route path="/demo">
           <Demo />
         </Route>
-        <Route path="/checkout">
-          <Checkout />
-        </Route>
+        <Route path="/checkout">{isLogin ? <Checkout /> : <Login />}</Route>
         <Redirect exact from="/" to="/login" />
       </Switch>
     </>

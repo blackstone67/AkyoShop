@@ -1,12 +1,14 @@
 import { Container, makeStyles, Typography } from '@material-ui/core';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Footer from '../../Components/Footer/Footer';
 import Search from '../../Components/UI/Search/SearchProduct';
 import SelectProduct from '../../Components/UI/Select/SelectProduct';
 import ListProduct from '../Home/ListProduct/ListProduct';
 import _ from 'lodash';
 import { Skeleton } from '@material-ui/lab';
+import { actionsHome } from '../../store/homeSlice';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -73,10 +75,28 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AllProduct = () => {
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
   const classes = useStyles();
   const productHome = useSelector((state) => state.home.productHome);
   const searchQuery = useSelector((state) => state.search.searchQuery);
   const valueSelect = useSelector((state) => state.select.valueSelect);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    dispatch(actionsHome.setIsLogin());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (searchQuery || valueSelect) {
+      setLoading(true);
+
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+    }
+  }, [searchQuery, valueSelect]);
+
   let filtered = productHome;
 
   if (searchQuery) {
@@ -86,29 +106,29 @@ const AllProduct = () => {
   }
 
   if (valueSelect === 'nameIncrease')
-    filtered = _.orderBy(filtered, ['name'], ['asc']);
-  else if (valueSelect === 'nameDecrease')
     filtered = _.orderBy(filtered, ['name'], ['desc']);
+  else if (valueSelect === 'nameDecrease')
+    filtered = _.orderBy(filtered, ['name'], ['asc']);
   else if (valueSelect === 'priceIncrease')
-    filtered = _.orderBy(filtered, ['price'], ['asc']);
-  else if (valueSelect === 'priceDecrease')
     filtered = _.orderBy(filtered, ['price'], ['desc']);
+  else if (valueSelect === 'priceDecrease')
+    filtered = _.orderBy(filtered, ['price'], ['asc']);
 
   return (
     <>
       <main>
         <Container className={classes.cardGrid} maxWidth="md">
           <section className={classes.NavHero}>
-            <h1>Tất cả Sản phẩm</h1>
+            <h1>{t('allProduct')}</h1>
             <div className={classes.select}>
-              <p>Ưu tiên theo: </p>
+              <p>{t('PrioritizeBy')} </p>
               <div className={classes.select}>
                 <SelectProduct />
                 <Search />
               </div>
             </div>
           </section>
-          {productHome.length === 0 && (
+          {(productHome.length === 0 || loading) && (
             <div
               style={{
                 display: 'flex',
@@ -138,7 +158,7 @@ const AllProduct = () => {
               </div>
             </div>
           )}
-          <ListProduct dataProduct={filtered} classes={classes} />
+          {!loading && <ListProduct dataProduct={filtered} classes={classes} />}
         </Container>
       </main>
       <Footer />

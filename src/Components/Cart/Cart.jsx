@@ -41,56 +41,61 @@ const Cart = (props) => {
           <div className={classes.card}>{t('cart')}</div>
         </div>
         {productCart.length === 0 && (
-          <p className={classes.titleEmpty}>
-            Không có sản phẩm nào trong giỏ hàng.
-          </p>
+          <p className={classes.titleEmpty}>{t('emptyProduct')}</p>
         )}
         {productCart.length > 0 && (
           <>
-            {productCart.map((item) => (
-              <div className={classes.cart_info} key={item.id}>
-                <div className={classes.product}>
-                  <div className={classes.avatar}>
-                    {item.image.indexOf('image') !== -1 ? (
-                      <Avatar
-                        alt="Remy Sharp"
-                        variant="square"
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                        }}
-                        src={`https://backendfashionstore.azurewebsites.net/api/ImageUploads/${item.image}`}
-                      />
-                    ) : (
-                      <Avatar
-                        alt="Remy Sharp"
-                        variant="square"
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                        }}
-                        src={`https:${item.image}`}
-                      />
-                    )}
+            <div
+              style={{
+                maxHeight: '55vh',
+                overflow: 'auto',
+              }}
+            >
+              {productCart.map((item) => (
+                <div className={classes.cart_info} key={item.id}>
+                  <div className={classes.product}>
+                    <div className={classes.avatar}>
+                      {item.image.indexOf('image') !== -1 ? (
+                        <Avatar
+                          alt="Remy Sharp"
+                          variant="square"
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                          }}
+                          src={`https://huuhieu.site/api/ImageUploads/${item.image}`}
+                        />
+                      ) : (
+                        <Avatar
+                          alt="Remy Sharp"
+                          variant="square"
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                          }}
+                          src={`https:${item.image}`}
+                        />
+                      )}
+                    </div>
+                    <div className={classes.info}>
+                      <div className={classes.name}>
+                        {item.name} - Size : {item.sizeS || ''}{' '}
+                        {item.sizeM || ''} {item.sizeL || ''}
+                      </div>
+                      <div className={classes.price}>
+                        {item.quality} x {item.price / 1000}.000₫
+                      </div>
+                    </div>
                   </div>
-                  <div className={classes.info}>
-                    <div className={classes.name}>
-                      {item.name} - Size : {item.sizeS || ''} {item.sizeM || ''}{' '}
-                      {item.sizeL || ''}
-                    </div>
-                    <div className={classes.price}>
-                      {item.quality} x {item.price / 1000}.000₫
-                    </div>
+                  <div
+                    className={classes.closeProduct}
+                    onClick={() => removeCartHandler(item.id)}
+                  >
+                    <GrClose />
                   </div>
                 </div>
-                <div
-                  className={classes.closeProduct}
-                  onClick={() => removeCartHandler(item.id)}
-                >
-                  <GrClose />
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
 
             <div className={classes.amount}>
               <div>{t('totalAmount')}: </div>

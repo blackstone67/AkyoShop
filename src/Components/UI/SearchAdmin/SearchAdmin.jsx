@@ -3,27 +3,20 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { InputAdornment } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import { useDispatch, useSelector } from 'react-redux';
-import { actionsSearch } from '../../../store/searchSlice';
 import { useTranslation } from 'react-i18next';
 
-export default function Search() {
-  const dispatch = useDispatch();
+export default function SearchAdmin({ title }) {
   const { t } = useTranslation();
-
-  const searchQuery = useSelector((state) => state.search.searchQuery);
-
-  const onSearchChange = (e) => {
-    dispatch(actionsSearch.valueSearchChanged(e.target.value));
-  };
 
   return (
     <TextField
-      label={t('search')}
-      placeholder={`${t('orderSearch')} . . .`}
+      label={t('labelSearchProduct')}
+      placeholder={`${title} . . .`}
       fullWidth={true}
       style={{
-        width: '300px',
+        maxWidth: '550px',
+        background: '#fff',
+        borderRadius: '4px',
       }}
       color="primary"
       type="text"
@@ -36,8 +29,6 @@ export default function Search() {
       }}
       multiline
       variant="outlined"
-      value={searchQuery}
-      onChange={(e) => onSearchChange(e)}
     />
   );
 }

@@ -10,6 +10,8 @@ const loginSlice = createSlice({
     errorEmptyEmail: false,
     errorEmptyPassword: false,
     errorLogin: false,
+    isUserLogin: false,
+    userName: '',
   },
   reducers: {
     emailChanged(state, action) {
@@ -46,6 +48,12 @@ const loginSlice = createSlice({
       state.errorPassword = false;
       state.errorEmptyEmail = false;
       state.errorEmptyPassword = false;
+    },
+    setIsUserLogin(state) {
+      state.isUserLogin = true;
+    },
+    setUserName(state, action) {
+      state.userName = action.payload;
     },
   },
 });

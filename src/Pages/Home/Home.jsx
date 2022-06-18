@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Footer from '../../Components/Footer/Footer';
@@ -7,7 +7,10 @@ import About from './About/About';
 import ListProduct from './ListProduct/ListProduct';
 import { useSelector } from 'react-redux';
 import Skeleton from '@material-ui/lab/Skeleton';
-import { Typography } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
+import Category from '../../Components/UI/Category/Category';
+import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   heroContent: {
@@ -79,11 +82,38 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-around',
     marginBottom: '2rem',
   },
+  loadMore: {
+    marginTop: '1rem',
+  },
 }));
 
 export default function Home() {
   const classes = useStyles();
+  const history = useHistory();
+  const { t } = useTranslation();
   const productHome = useSelector((state) => state.home.productHome);
+  const [loading, setLoading] = useState(false);
+  const valueCategory = useSelector((state) => state.category.valueCategory);
+
+  let filtered = productHome;
+
+  if (valueCategory !== '') {
+    filtered = productHome.filter((item) => item.category === +valueCategory);
+  }
+
+  useEffect(() => {
+    if (valueCategory !== '') {
+      setLoading(true);
+
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+    }
+  }, [valueCategory]);
+
+  const handlerShowMore = () => {
+    history.push('/all-product');
+  };
 
   return (
     <React.Fragment>
@@ -91,7 +121,8 @@ export default function Home() {
         <Hero classes={classes} />
         <Container className={classes.cardGrid} maxWidth="md">
           <About classes={classes} />
-          {productHome.length === 0 && (
+          <Category />
+          {(filtered.length === 0 || loading) && (
             <div
               style={{
                 display: 'flex',
@@ -121,8 +152,21 @@ export default function Home() {
               </div>
             </div>
           )}
-
-          <ListProduct dataProduct={productHome} classes={classes} />
+          {!loading && (
+            <>
+              <ListProduct dataProduct={filtered} classes={classes} />
+              <div className={classes.loadMore}>
+                <Button
+                  onClick={handlerShowMore}
+                  fullWidth={true}
+                  variant="contained"
+                  color="primary"
+                >
+                  {t('btnShowMore')}
+                </Button>
+              </div>
+            </>
+          )}
         </Container>
       </main>
       <Footer />

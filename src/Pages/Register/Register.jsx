@@ -117,7 +117,7 @@ export default function Register() {
       handleOpen();
       setTimeout(() => {
         axios.post(
-          `https://backendfashionstore.azurewebsites.net/api/Users/Register?userName=${fullName}&userEmail=${email}&userPassword=${password}`,
+          `https://huuhieu.site/api/Users/Register?userName=${fullName}&userEmail=${email}&userPassword=${password}`,
           {
             userEmail: email,
             userName: fullName,
