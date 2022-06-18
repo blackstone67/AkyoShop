@@ -62,8 +62,8 @@ const ForgotPassword = () => {
     if (validateEmail(value) && value !== '') {
       setOpenBackDrop(true);
       setTimeout(() => {
-        axios.get(
-          `https://huuhieu.site/api/Users/ForgotPassword?userEmail=${value}`
+        axios.post(
+          `https://backendfashionstore.azurewebsites.net/api/Users/ForgotPassword?userEmail=${value}`
         );
         setErrorEmail(false);
         setErrorEmptyEmail(false);

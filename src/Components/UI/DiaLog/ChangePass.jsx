@@ -8,7 +8,7 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles, TextField } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 
@@ -61,17 +61,15 @@ export default function ChangePass({ openDialog, onClose }) {
   const token = useSelector((state) => state.login.token);
 
   const changedPasswordHandler = async () => {
-    console.log(token);
-
-    const response = await axios.get(
+    const response = await axios.post(
       `https://backendfashionstore.azurewebsites.net/api/Users/ChangePassword?userPassword=${password}`,
       {
         headers: {
-          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       }
     );
+
     if (response.status === 200) {
       onClose();
     }

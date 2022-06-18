@@ -163,7 +163,7 @@ const NavBar = () => {
                   className={classes.iconAvatar}
                   alt="user"
                   src="https://images.unsplash.com/photo-1650662721083-867715246fbb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3MXx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60"
-                  onClick={() => history.push('/admin')}
+                  onClick={() => history.push('/user')}
                 />
               </StyledBadge>
               <Typography

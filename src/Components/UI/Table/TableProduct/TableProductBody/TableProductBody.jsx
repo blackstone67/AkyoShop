@@ -1,6 +1,5 @@
 import { Avatar, TableBody, TableCell, TableRow } from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import { useTranslation } from 'react-i18next';
 import React from 'react';
 
 const useStyles = makeStyles({
@@ -45,7 +44,6 @@ const StyledTableCell = withStyles((theme) => ({
 }))(TableCell);
 
 const TableProductBody = ({ dataTable }) => {
-  const { t } = useTranslation();
   const classes = useStyles();
 
   return (

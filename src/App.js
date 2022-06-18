@@ -23,7 +23,9 @@ function App() {
 
   useEffect(() => {
     async function getApiProductHome() {
-      const response = await axios.get('https://huuhieu.site/api/Products');
+      const response = await axios.get(
+        'https://backendfashionstore.azurewebsites.net/api/Products'
+      );
       let data = [];
       for (let i = 0; i < response.data.length; i++) {
         if (response.data[i].images.length > 0) {
@@ -61,7 +63,7 @@ function App() {
         <Route path="/all-product">
           {isLogin ? <AllProduct /> : <Login />}
         </Route>
-        <Route path="/admin">{isLogin ? <Admin /> : <Login />}</Route>
+        <Route path="/user">{isLogin ? <Admin /> : <Login />}</Route>
         <Route path="/demo">
           <Demo />
         </Route>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-const BACKEND_DOMAIN = 'https://huuhieu.site/api';
+const BACKEND_DOMAIN = 'https://backendfashionstore.azurewebsites.net/api';
 
 export async function getAllProducts() {
   const response = await axios.get(`${BACKEND_DOMAIN}/Products`);
